@@ -36,43 +36,44 @@ func main() {
 		fmt.Scan(&userTickets)
 
 		// break from loop if user books tickets than what is available
-		if userTickets > remainingTickets {
-			fmt.Printf("We only have %v tickets available. Please book within range\n", remainingTickets)
-			continue
+		if userTickets <= remainingTickets {
+			// calculate remaining tickets:
+			remainingTickets = remainingTickets - userTickets
+
+			//store new users in slice
+			bookings = append(bookings, firstName+" "+lastName)
+
+			// see test bookings in slice
+			fmt.Printf("Slice value %v\n", bookings)
+			fmt.Printf("The type is %T\n", bookings)
+
+			fmt.Printf("Thank you  %v %v for booking %v tickets. You will receive a confirmation at %v\n", firstName, lastName, userTickets, email)
+			fmt.Printf("%v Remaining tickets\n", remainingTickets)
+
+			// return slice with only firstNames:
+			firstNames := []string{}
+			for _, booking := range bookings {
+				var names = strings.Fields(booking)
+				firstNames = append(firstNames, names[0])
+			}
+
+			fmt.Printf("This are all of our bookings %v\n", firstNames)
+
+			// use break keyword to break out of the loop
+			/*can use this sytax in if
+			noTicketsRemaining := remainingTickets == 0
+			if noTicketsRemaining{
+				...
+			}
+			*/
+			if remainingTickets == 0 {
+				fmt.Println("The conference is booked out.")
+				break
+			}
 		}
-		// calculate remaining tickets:
-		remainingTickets = remainingTickets - userTickets
+		fmt.Printf("We only have %v tickets available. Please book within range\n", remainingTickets)
+		continue
 
-		//store new users in slice
-		bookings = append(bookings, firstName+" "+lastName)
-
-		// see test bookings in slice
-		fmt.Printf("Slice value %v\n", bookings)
-		fmt.Printf("The type is %T\n", bookings)
-
-		fmt.Printf("Thank you  %v %v for booking %v tickets. You will receive a confirmation at %v\n", firstName, lastName, userTickets, email)
-		fmt.Printf("%v Remaining tickets\n", remainingTickets)
-
-		// return slice with only firstNames:
-		firstNames := []string{}
-		for _, booking := range bookings {
-			var names = strings.Fields(booking)
-			firstNames = append(firstNames, names[0])
-		}
-
-		fmt.Printf("This are all of our bookings %v\n", firstNames)
-
-		// use break keyword to break out of the loop
-		/*can use this sytax in if
-		noTicketsRemaining := remainingTickets == 0
-		if noTicketsRemaining{
-			...
-		}
-		*/
-		if remainingTickets == 0 {
-			fmt.Println("The conference is booked out.")
-			break
-		}
 	}
 
 }
