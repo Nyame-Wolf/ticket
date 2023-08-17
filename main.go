@@ -58,6 +58,12 @@ func main() {
 		fmt.Printf("This are all of our bookings %v\n", firstNames)
 
 		// use break keyword to break out of the loop
+		/*can use this sytax in if
+		noTicketsRemaining := remainingTickets == 0
+		if noTicketsRemaining{
+			...
+		}
+		*/
 		if remainingTickets == 0 {
 			fmt.Println("The conference is booked out.")
 			break
