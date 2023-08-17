@@ -72,7 +72,6 @@ func main() {
 			}
 		}
 		fmt.Printf("We only have %v tickets available. Please book within range\n", remainingTickets)
-		continue
 
 	}
 
