@@ -22,6 +22,7 @@ func main() {
 	// create a welcome message for conference attendees.
 	fmt.Printf("Welcome to the %v. There are a total of  %v tickets and only %v tickets remaining\n", conferenceName, remainingTickets, conferenceTickets)
 
+	// indefinite loop to keep prompting user to book tickets
 	for {
 		// get back user unput
 		fmt.Println("Enter your first name to book:")
