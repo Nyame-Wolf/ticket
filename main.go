@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strings"
 )
 
 // create package level variables
@@ -47,7 +48,14 @@ func main() {
 		fmt.Printf("Thank you  %v %v for booking %v tickets. You will receive a confirmation at %v\n", firstName, lastName, userTickets, email)
 		fmt.Printf("%v Remaining tickets\n", remainingTickets)
 
-		fmt.Printf("This are all of our bookings %v\n", bookings)
+		// return slice with only firstNames:
+		firstNames := []string{}
+		for _, booking := range bookings {
+			var names = strings.Fields(booking)
+			firstNames = append(firstNames, names[0])
+		}
+
+		fmt.Printf("This are all of our bookings %v\n", firstNames)
 	}
 
 }
