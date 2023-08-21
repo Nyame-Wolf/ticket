@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 	"strings"
 	"ticketing/helper"
 )
@@ -116,6 +117,15 @@ func bookTickets(userTickets uint, firstName, lastName, email string) {
 
 	//store new users in slice
 	bookings = append(bookings, firstName+" "+lastName)
+
+	// create a map
+	userData := make(map[string]string)
+	//add data to the map
+	userData["firstName"] = firstName
+	userData["lastName"] = lastName
+	userData["email"] = email
+	userData["noOfTickets"] = strconv.FormatUint(uint64(userTickets), 10)
+
 	fmt.Printf("Thank you  %v %v for booking %v tickets. You will receive a confirmation at %v\n", firstName, lastName, userTickets, email)
 	fmt.Printf("%v Remaining tickets\n", remainingTickets)
 }
