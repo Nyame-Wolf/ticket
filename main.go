@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"strconv"
-	"strings"
 	"ticketing/helper"
 )
 
@@ -11,8 +10,9 @@ import (
 const conferenceTickets = 50
 const conferenceName = "Go Conference"
 
-// create empty slice bookings := []string{}
-var bookings []string
+// create an empty slice of maps bookings := []string{}
+// add a second arg to make, for initial size of the map
+var bookings = make([]map[string]string, 0)
 
 // create  a variable to track available tickets
 var remainingTickets uint = conferenceTickets
@@ -83,10 +83,10 @@ func greetUsers() {
 // returns a slice of firstnames. Print happens in main func.
 func getFirstNames() []string {
 	// return slice with only firstNames:
+	// since its a map, remove string.Fields
 	firstNames := []string{}
 	for _, booking := range bookings {
-		var names = strings.Fields(booking)
-		firstNames = append(firstNames, names[0])
+		firstNames = append(firstNames, booking["firstName"])
 	}
 
 	return firstNames
@@ -115,9 +115,6 @@ func bookTickets(userTickets uint, firstName, lastName, email string) {
 	// calculate remaining tickets:
 	remainingTickets = remainingTickets - userTickets
 
-	//store new users in slice
-	bookings = append(bookings, firstName+" "+lastName)
-
 	// create a map
 	userData := make(map[string]string)
 	//add data to the map
@@ -126,6 +123,13 @@ func bookTickets(userTickets uint, firstName, lastName, email string) {
 	userData["email"] = email
 	userData["noOfTickets"] = strconv.FormatUint(uint64(userTickets), 10)
 
+	//store new users in slice
+	bookings = append(bookings, userData)
+
 	fmt.Printf("Thank you  %v %v for booking %v tickets. You will receive a confirmation at %v\n", firstName, lastName, userTickets, email)
-	fmt.Printf("%v Remaining tickets\n", remainingTickets)
+	fmt.Printf("%v Remaining tickets\n\n", remainingTickets)
+
+	// print list of bookings
+	fmt.Printf("Here is a list of your bookings: %v\n", bookings)
+
 }
