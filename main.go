@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"strings"
+	"ticketing/helper"
 )
 
 // create package level variables
@@ -22,7 +23,7 @@ func main() {
 	// indefinite loop to keep prompting user to book tickets
 	for {
 		firstName, lastName, email, userTickets := getUserInput()
-		isValidName, isValidEmail, isValidTicketNo := validateUserInput(firstName, lastName, email, userTickets)
+		isValidName, isValidEmail, isValidTicketNo := helper.ValidateUserInput(firstName, lastName, email, userTickets, remainingTickets)
 
 		// break from loop if user books tickets than what is available
 		if isValidName && isValidEmail && isValidTicketNo {

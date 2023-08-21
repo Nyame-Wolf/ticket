@@ -1,8 +1,8 @@
-package main
+package helper
 
 import "strings"
 
-func validateUserInput(firstName, lastName, email string, userTickets uint) (bool, bool, bool) {
+func ValidateUserInput(firstName, lastName, email string, userTickets, remainingTickets uint) (bool, bool, bool) {
 	//user validation: names atleast 2 char long
 	isValidName := len(firstName) >= 2 && len(lastName) >= 2
 	//validate email
